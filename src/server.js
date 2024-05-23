@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const PORT = 3000;
+const PORT = Number(process.env.PORT);
 
 export const setupServer = () => {
   const app = express();
