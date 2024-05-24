@@ -8,8 +8,8 @@ export const getContacts = async () => {
     data: contacts,
   };
 };
-export const getContactById = async (id) => {
-  const contact = await Contact.findById(id);
+export const getContactById = async (contactId) => {
+  const contact = await Contact.findById(contactId);
   if (!contact) {
     return {
       status: 'error',
@@ -19,7 +19,7 @@ export const getContactById = async (id) => {
   }
   return {
     status: 'success',
-    message: `'Successfully found contact with id ${id}!'`,
+    message: `'Successfully found contact with id ${contactId}!'`,
     data: contact,
   };
 };
