@@ -1,11 +1,10 @@
 import express from 'express';
 import pino from 'pino-http';
 import cors from 'cors';
-import dotenv from 'dotenv';
+import { env } from './utils/env.js';
+import { getContactById, getContacts } from './services/contacts.js';
 
-dotenv.config();
-
-const PORT = Number(process.env.PORT);
+const PORT = Number(env('PORT', '3000'));
 
 export const setupServer = () => {
   const app = express();
@@ -27,7 +26,22 @@ export const setupServer = () => {
     });
   });
 
-  app.use('*', (req, res, next) => {
+  app.get('/contacts', async (req, res) => {
+    const contacts = await getContacts();
+
+    res.status(200).json({
+      data: contacts,
+    });
+  });
+  app.get('/contacts/:contactId', async (req, res) => {
+    const { contactId } = req.params;
+    const contact = await getContactById(contactId);
+
+    res.status(200).json({
+      data: contact,
+    });
+  });
+  app.use('*', (req, res) => {
     res.status(404).json({
       message: 'Not found',
     });
