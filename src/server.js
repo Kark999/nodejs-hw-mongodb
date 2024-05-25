@@ -3,6 +3,7 @@ import pino from 'pino-http';
 import cors from 'cors';
 import { env } from './utils/env.js';
 import { getContactById, getContacts } from './services/contacts.js';
+import { isValidObjectId } from './validation/validation.js';
 
 const PORT = Number(env('PORT', '3000'));
 
@@ -28,21 +29,30 @@ export const setupServer = () => {
 
   app.get('/contacts', async (req, res) => {
     const contacts = await getContacts();
-
-    res.status(200).json({
+    res.json({
+      status: 200,
+      message: 'Successfully found contacts!',
       data: contacts,
     });
   });
   app.get('/contacts/:contactId', async (req, res) => {
     const { contactId } = req.params;
+    if (!isValidObjectId(contactId)) {
+      return res.json({
+        status: 400,
+        message: 'Invalid contact ID',
+      });
+    }
     const contact = await getContactById(contactId);
-
-    res.status(200).json({
+    res.json({
+      status: 200,
+      message: `'Successfully found contact with id ${contactId}!'`,
       data: contact,
     });
   });
   app.use('*', (req, res) => {
-    res.status(404).json({
+    res.json({
+      status: 404,
       message: 'Not found',
     });
   });

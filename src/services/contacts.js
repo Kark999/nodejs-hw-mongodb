@@ -1,25 +1,15 @@
 import { Contact } from '../db/models/contact.js';
+import { isValidObjectId } from '../validation/validation.js';
 
 export const getContacts = async () => {
   const contacts = await Contact.find();
-  return {
-    status: 'success',
-    message: 'Successfully found contacts!',
-    data: contacts,
-  };
+  return contacts;
 };
 export const getContactById = async (contactId) => {
-  const contact = await Contact.findById(contactId);
-  if (!contact) {
-    return {
-      status: 'error',
-      message: 'Contact not found',
-      data: null,
-    };
+  if (!isValidObjectId(contactId)) {
+    return;
+  } else {
+    const contact = await Contact.findById(contactId);
+    return contact;
   }
-  return {
-    status: 'success',
-    message: `'Successfully found contact with id ${contactId}!'`,
-    data: contact,
-  };
 };
