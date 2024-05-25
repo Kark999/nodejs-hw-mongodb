@@ -37,6 +37,12 @@ export const setupServer = () => {
   });
   app.get('/contacts/:contactId', async (req, res) => {
     const { contactId } = req.params;
+    if (!isValidObjectId(contactId)) {
+      return res.json({
+        status: 400,
+        message: 'Invalid contact ID',
+      });
+    }
     const contact = await getContactById(contactId);
     res.json({
       status: 200,
@@ -49,15 +55,6 @@ export const setupServer = () => {
       status: 404,
       message: 'Not found',
     });
-  });
-
-  app.use('/contacts/:contactId', (contactId, req, res) => {
-    if (!isValidObjectId(contactId)) {
-      res.json({
-        status: 404,
-        message: 'Invalid contact ID',
-      });
-    }
   });
 
   app.listen(PORT, () => {
