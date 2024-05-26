@@ -44,9 +44,16 @@ export const setupServer = () => {
       });
     }
     const contact = await getContactById(contactId);
+    if (!contact) {
+      return res.json({
+        status: 200,
+        message: `Successfully found contact with id ${contactId}!`,
+        data: null,
+      });
+    }
     res.json({
       status: 200,
-      message: `'Successfully found contact with id ${contactId}!'`,
+      message: `Successfully found contact with id ${contactId}!`,
       data: contact,
     });
   });
