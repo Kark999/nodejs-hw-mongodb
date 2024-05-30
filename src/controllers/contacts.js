@@ -1,5 +1,5 @@
-import { getContactById, getContacts } from '../services/contacts';
-import { isValidObjectId } from '../validation/validation';
+import { getContactById, getContacts } from '../services/contacts.js';
+import { isValidObjectId } from '../validation/validation.js';
 import createHttpError from 'http-errors';
 
 export const getContactsController = async (req, res) => {
