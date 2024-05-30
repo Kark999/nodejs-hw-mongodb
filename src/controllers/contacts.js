@@ -1,5 +1,6 @@
 import { getContactById, getContacts } from '../services/contacts';
 import { isValidObjectId } from '../validation/validation';
+import createHttpError from 'http-errors';
 
 export const getContactsController = async (req, res) => {
   const contacts = await getContacts();
@@ -9,20 +10,17 @@ export const getContactsController = async (req, res) => {
     data: contacts,
   });
 };
-export const getContactByIdController = async (req, res) => {
+export const getContactByIdController = async (req, res, next) => {
   const { contactId } = req.params;
+
   if (!isValidObjectId(contactId)) {
-    return res.json({
-      status: 400,
-      message: 'Invalid contact ID',
-    });
+    next(createHttpError(400, 'Invalid contact ID'));
+    return;
   }
   const contact = await getContactById(contactId);
   if (!contact) {
-    return res.json({
-      status: 404,
-      message: 'Contact not found',
-    });
+    next(createHttpError(404, 'Contact not found'));
+    return;
   }
   res.json({
     status: 200,
