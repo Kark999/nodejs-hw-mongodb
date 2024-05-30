@@ -8,6 +8,10 @@ import { errorHandler } from './middlewares/errorHandler.js';
 
 const PORT = Number(env('PORT', '3000'));
 
+if (!PORT) {
+  throw new Error('PORT is required!');
+}
+
 export const setupServer = () => {
   const app = express();
 
