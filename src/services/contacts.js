@@ -15,13 +15,16 @@ export const getContacts = async ({
 
   const contactsQuery = Contact.find();
 
-  if (filter) {
-    contactsQuery.merge(filter);
+  if (filter.contactType) {
+    contactsQuery.where('contactType').equals(filter.contactType);
+  }
+  if (filter.isFavourite) {
+    contactsQuery.where('isFavourite').equals(filter.isFavourite);
   }
 
   const [contactsCount, contacts] = await Promise.all([
-    Contact.find().merge(contactsQuery).countDocuments(),
-    contactsQuery
+    Contact.find(contactsQuery).countDocuments(),
+    Contact.find(contactsQuery)
       .skip(skip)
       .limit(limit)
       .sort({ [sortBy]: sortOrder })
