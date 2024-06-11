@@ -11,21 +11,21 @@ import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 import { validateBody } from '../middlewares/validateBody.js';
 import { createContactSchema } from '../validation/contacts.js';
 
-const router = Router();
+const contactsRouter = Router();
 
-router.get('/contacts', ctrlWrapper(getContactsController));
-router.get('/contacts/:contactId', ctrlWrapper(getContactByIdController));
-router.post(
-  '/contacts',
+contactsRouter.get('/', ctrlWrapper(getContactsController));
+contactsRouter.get('/:contactId', ctrlWrapper(getContactByIdController));
+contactsRouter.post(
+  '',
   validateBody(createContactSchema),
   ctrlWrapper(createContactController),
 );
-router.delete('/contacts/:contactId', ctrlWrapper(deleteContactController));
-router.put('/contacts/:contactId', ctrlWrapper(upsertContactController));
-router.patch(
-  '/contacts/:contactId',
+contactsRouter.delete('/:contactId', ctrlWrapper(deleteContactController));
+contactsRouter.put('/:contactId', ctrlWrapper(upsertContactController));
+contactsRouter.patch(
+  '/:contactId',
   validateBody(createContactSchema),
   ctrlWrapper(patchContactController),
 );
 
-export default router;
+export default contactsRouter;
