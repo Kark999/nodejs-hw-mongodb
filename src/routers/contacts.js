@@ -13,17 +13,17 @@ import { createContactSchema } from '../validation/contacts.js';
 
 const router = Router();
 
-router.get('/contacts', ctrlWrapper(getContactsController));
-router.get('/contacts/:contactId', ctrlWrapper(getContactByIdController));
+router.get('/', ctrlWrapper(getContactsController));
+router.get('/:contactId', ctrlWrapper(getContactByIdController));
 router.post(
-  '/contacts',
+  '',
   validateBody(createContactSchema),
   ctrlWrapper(createContactController),
 );
-router.delete('/contacts/:contactId', ctrlWrapper(deleteContactController));
-router.put('/contacts/:contactId', ctrlWrapper(upsertContactController));
+router.delete('/:contactId', ctrlWrapper(deleteContactController));
+router.put('/:contactId', ctrlWrapper(upsertContactController));
 router.patch(
-  '/contacts/:contactId',
+  '/:contactId',
   validateBody(createContactSchema),
   ctrlWrapper(patchContactController),
 );
