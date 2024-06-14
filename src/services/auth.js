@@ -6,12 +6,22 @@ import { FIFTEEN_MINUTES, THIRTY_DAYS } from '../constants/index.js';
 import { SessionsCollection } from '../db/models/session.js';
 
 export const registerUser = async (payload) => {
+  const existingUser = await UsersCollection.findOne({ email: payload.email });
+  if (existingUser) {
+    throw createHttpError(409, 'Email in use');
+  }
+
   const encryptedPassword = await bcrypt.hash(payload.password, 10);
 
-  return await UsersCollection.create({
+  const newUser = await UsersCollection.create({
     ...payload,
     password: encryptedPassword,
   });
+
+  const userObject = newUser.toObject();
+  delete userObject.password;
+
+  return userObject;
 };
 export const loginUser = async (payload) => {
   const user = await UsersCollection.findOne({ email: payload.email });
