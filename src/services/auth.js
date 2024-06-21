@@ -122,6 +122,12 @@ export const requestResetToken = async (email) => {
     to: email,
     subject: 'Reset your password',
     html: `<p>Click <a href="${resetToken}">here</a> to reset your password!</p>`,
+  }).catch((emailError) => {
+    console.error('Failed to send initial email:', emailError);
+    throw createHttpError(
+      500,
+      'Failed to send the email, please try again later.',
+    );
   });
 
   const resetPasswordTemplatePath = path.join(
@@ -144,6 +150,12 @@ export const requestResetToken = async (email) => {
     to: email,
     subject: 'Reset your password',
     html,
+  }).catch((emailError) => {
+    console.error('Failed to send final email:', emailError);
+    throw createHttpError(
+      500,
+      'Failed to send the email, please try again later.',
+    );
   });
 };
 
@@ -153,7 +165,8 @@ export const resetPassword = async (payload) => {
   try {
     entries = jwt.verify(payload.token, env('JWT_SECRET'));
   } catch (err) {
-    if (err instanceof Error) throw createHttpError(401, err.message);
+    if (err instanceof Error)
+      throw createHttpError(401, 'Token is expired or invalid.');
     throw err;
   }
 
