@@ -60,7 +60,11 @@ export const createContactController = async (req, res, next) => {
 
   let photoUrl;
   if (req.file) {
-    photoUrl = await saveFileToCloudinary(req.file.path);
+    try {
+      photoUrl = await saveFileToCloudinary(req.file.buffer);
+    } catch (error) {
+      return next(error);
+    }
   }
 
   const contactData = { ...req.body, userId, photo: photoUrl };
@@ -71,7 +75,6 @@ export const createContactController = async (req, res, next) => {
     message: 'Successfully created a contact!',
     data: contact,
   });
-  next();
 };
 
 export const deleteContactController = async (req, res, next) => {
