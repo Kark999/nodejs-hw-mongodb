@@ -17,6 +17,9 @@ servers:
   - url: <https://nodejs-hw-mongodb-4-s9sr.onrender.com>
 paths:
   /contacts:
+    get:
+      $ref: '../swagger/paths/contacts/get.yaml'
+  /contacts:
     post:
       $ref: '../swagger/paths/contacts/post.yaml'
   /contacts/{id}:
