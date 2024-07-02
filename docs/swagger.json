@@ -588,7 +588,7 @@
               "properties": {
                 "status": {
                   "type": "integer",
-                  "example": 500
+                  "example": 401
                 },
                 "message": {
                   "type": "string",
