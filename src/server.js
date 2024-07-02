@@ -6,11 +6,16 @@ import router from './routers/index.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 import cookieParser from 'cookie-parser';
+import { swaggerDocs } from './middlewares/swaggerDocs.js';
+import { TEMPLATES_DIR } from './constants/index.js';
 
 const PORT = Number(env('PORT', '3000'));
 
 export const setupServer = () => {
   const app = express();
+
+  app.use('/uploads', express.static(TEMPLATES_DIR));
+  app.use('/api-docs', swaggerDocs());
 
   app.use(cors());
   app.use(express.json());
