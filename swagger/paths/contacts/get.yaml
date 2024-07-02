@@ -91,5 +91,5 @@ responses:
                 hasPreviousPage:
                   type: boolean
                   example: false
-  '500':
-    $ref: '../../components/responses/500.yaml'
+  '401':
+    $ref: '../../components/responses/401.yaml'
