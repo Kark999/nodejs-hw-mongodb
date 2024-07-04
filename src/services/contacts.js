@@ -40,10 +40,18 @@ export const getContacts = async ({
   };
 };
 export const getContactById = async ({ contactId, userId }) => {
+  console.log('Entering getContactById function');
+  console.log(
+    `Parameters received - contactId: ${contactId}, userId: ${userId}`,
+  );
   if (!isValidObjectId(contactId)) {
     return null;
   } else {
     const contact = await Contact.findOne({ _id: contactId, userId });
+
+    console.log(`Contact search query: _id: ${contactId}, userId: ${userId}`);
+    console.log(`Contact found: ${contact}`);
+
     return contact;
   }
 };

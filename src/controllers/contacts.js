@@ -39,12 +39,15 @@ export const getContactByIdController = async (req, res, next) => {
   const { contactId } = req.params;
   const { _id: userId } = req.user._id;
 
+  console.log(`Fetching contact with ID: ${contactId} for user: ${userId}`);
+
   if (!isValidObjectId(contactId)) {
     next(createHttpError(400, 'Invalid contact ID'));
     return;
   }
   const contact = await getContactById({ _id: contactId, userId });
   if (!contact) {
+    console.log(`Contact with ID: ${contactId} not found for user: ${userId}`);
     next(createHttpError(404, 'Contact not found'));
     return;
   }
