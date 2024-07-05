@@ -196,10 +196,7 @@
                 "type": "object",
                 "required": [
                   "name",
-                  "phoneNumber",
-                  "contactType",
-                  "isFavourite",
-                  "photo"
+                  "phoneNumber"
                 ],
                 "properties": {
                   "name": {
@@ -359,7 +356,7 @@
           "description": "Contact data to update",
           "required": true,
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
                 "type": "object",
                 "properties": {
@@ -592,7 +589,7 @@
                 },
                 "message": {
                   "type": "string",
-                  "example": "Something went wrong"
+                  "example": "Contacts not found"
                 },
                 "data": {
                   "type": "object",
@@ -602,7 +599,7 @@
                   "properties": {
                     "message": {
                       "type": "string",
-                      "example": "Something went wrong"
+                      "example": "Contacts not found"
                     }
                   }
                 }
