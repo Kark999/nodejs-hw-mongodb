@@ -354,7 +354,7 @@
         ],
         "requestBody": {
           "description": "Contact data to update",
-          "required": true,
+          "required": false,
           "content": {
             "multipart/form-data": {
               "schema": {
