@@ -14,9 +14,9 @@ parameters:
       example: '667c7db2572b690fd8e3ed4e'
 requestBody:
   description: Contact data to update
-  required: true
+  required: false
   content:
-    application/json:
+    multipart/form-data:
       schema:
         type: object
         properties:
