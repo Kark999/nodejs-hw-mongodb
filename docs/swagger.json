@@ -209,6 +209,11 @@
                     "type": "string",
                     "example": "+380123456789"
                   },
+                  "email": {
+                    "description": "Contact's email",
+                    "type": "string",
+                    "example": "iWq5v@example.com"
+                  },
                   "isFavourite": {
                     "description": "Is contact favourite",
                     "type": "boolean",
@@ -227,7 +232,7 @@
                   "photo": {
                     "description": "Contact's photo",
                     "type": "string",
-                    "example": "https://res.cloudinary.com/dqwmg5bgp/image/upload/v1719774643/we5jcolro12ayvbgcpmy.jpg"
+                    "format": "binary"
                   }
                 }
               }
@@ -370,6 +375,11 @@
                     "type": "string",
                     "example": "+380123456789"
                   },
+                  "email": {
+                    "description": "Contact's email",
+                    "type": "string",
+                    "example": "iWq5v@example.com"
+                  },
                   "isFavourite": {
                     "description": "Is contact favourite",
                     "type": "boolean",
@@ -388,7 +398,7 @@
                   "photo": {
                     "description": "Contact's photo",
                     "type": "string",
-                    "example": "https://res.cloudinary.com/dqwmg5bgp/image/upload/v1719774643/we5jcolro12ayvbgcpmy.jpg"
+                    "format": "binary"
                   }
                 }
               }
