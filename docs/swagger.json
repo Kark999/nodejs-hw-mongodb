@@ -62,10 +62,8 @@
             "in": "query",
             "name": "isFavourite",
             "schema": {
-              "type": "boolean",
-              "example": "true"
-            },
-            "description": "All contacts's fields can be mentioned. Default value - _id"
+              "type": "boolean"
+            }
           },
           {
             "in": "query",
@@ -76,8 +74,7 @@
                 "work",
                 "home",
                 "personal"
-              ],
-              "example": "home"
+              ]
             }
           },
           {
@@ -85,9 +82,8 @@
             "name": "sortBy",
             "schema": {
               "type": "string",
-              "example": "name"
-            },
-            "description": "All contacts's fields can be mentioned. Default value - _id"
+              "description": "All contacts's fields can be mentioned. Default value - _id"
+            }
           },
           {
             "in": "query",
@@ -538,7 +534,7 @@
           "photo": {
             "description": "Contact's photo",
             "type": "string",
-            "example": "https://res.cloudinary.com/dqwmg5bgp/image/upload/v1719774643/we5jcolro12ayvbgcpmy.jpg"
+            "format": "binary"
           }
         }
       }
