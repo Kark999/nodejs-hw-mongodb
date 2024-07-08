@@ -17,7 +17,7 @@ const router = Router();
 
 router.use(authenticate);
 
-router.get('/', uploadMiddleware, ctrlWrapper(getContactsController));
+router.get('/', ctrlWrapper(getContactsController));
 
 router.get('/:contactId', ctrlWrapper(getContactByIdController));
 router.post(
